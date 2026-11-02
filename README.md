@@ -1,0 +1,47 @@
+# Star Bem
+
+Site institucional do **Star Bem** — programa de bem-estar e saúde psicossocial da Volvo, alinhado às diretrizes da **NR-1** (riscos psicossociais).
+
+Página única, animada e responsiva, que apresenta o projeto de forma navegável e interliga todas as seções: do contexto legal ao cronograma, atividades, ação social e indicadores.
+
+## No ar
+
+GitHub Pages: https://rangeljfs.github.io/starbem/
+
+## Seções
+
+1. **Contexto** — propósito do programa e alinhamento à NR-1
+2. **NR-1 em dados** — cenário dos riscos psicossociais no Brasil (dados do INSS/ANAMT, prazos de fiscalização e exigências da norma)
+3. **Objetivos** — o que o programa quer alcançar
+4. **Como promover** — 8 frentes de ação
+5. **Público e cronograma** — 10 semanas, 1 atividade por semana
+6. **Atividades** — cardápio de experiências online e presenciais
+7. **Ação social** — campanha solidária (Páscoa)
+8. **Indicadores** — como medir o impacto
+9. **Benefícios esperados**
+
+## Estrutura
+
+```
+starbem/
+├── index.html            # página única
+├── assets/
+│   ├── css/style.css     # identidade visual e layout
+│   ├── js/app.js         # animações, navegação, contadores e gráficos
+│   └── img/              # imagens otimizadas
+└── README.md
+```
+
+## Identidade visual
+
+- Azul institucional (base Volvo) + acentos de bem-estar (coral, âmbar, verde)
+- Tipografia: Montserrat (display) + Inter (texto)
+- Animações: reveal on scroll, contadores, gráfico de barras, timeline e anéis de progresso
+
+## Fontes dos dados (seção NR-1)
+
+Os números são compilados de levantamentos públicos (INSS, ANAMT, OMS/Banco Mundial) e das portarias do MTE. Os recortes variam entre fontes; para uso oficial, confirmar nos boletins da Previdência Social e no Guia de Riscos Psicossociais do MTE.
+
+---
+
+Desenvolvimento: controladoria Silva & Silva.
