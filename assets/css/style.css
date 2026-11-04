@@ -358,10 +358,66 @@ svg.ic{display:block}
   .promo-lista{grid-template-columns:1fr}
   .benef-grid{grid-template-columns:1fr}
 }
-@media (max-width:560px){
+
+/* ========= CELULAR: rola de verdade, nada cortado nem sobreposto ========= */
+@media (max-width:640px){
+  /* o slide alinha ao topo e ROLA; não centraliza (senão corta topo/base) */
+  .slide{
+    align-items:flex-start;justify-content:flex-start;
+    padding:84px 20px 118px;            /* topo abaixo da marca; base acima dos controles */
+    -webkit-overflow-scrolling:touch;
+  }
+  .slide-inner{max-width:100%}
+  .bg-papel .slide-inner,.bg-branco .slide-inner{padding-left:14px}
+  .slide.bg-papel::before,.slide.bg-branco::before{width:8px}      /* faixa lateral mais fina */
+  .slide.bg-papel::after,.slide.bg-branco::after{display:none}
+
+  /* tipografia menor pra caber no estreito */
+  .s-titulo{font-size:clamp(1.6rem,8vw,2.1rem)}
+  .eyebrow{font-size:.64rem;letter-spacing:.16em;margin-bottom:16px;gap:10px}
+  .eyebrow::before{width:20px}
+  .lead,.ctx-texto p{font-size:1rem;line-height:1.56}
+
+  /* capa: estrela + marca juntas e menores, sem quebrar feio */
+  .capa h1{font-size:clamp(2.6rem,15vw,3.6rem);gap:.18em;flex-wrap:nowrap;align-items:center}
+  .capa h1 .star-xl{width:clamp(34px,11vw,48px);height:clamp(34px,11vw,48px)}
+  .capa .sub{font-size:1rem;margin-top:18px}
+  .capa-badge{margin-bottom:18px}
+  .capa-art{max-width:100%;margin-top:4px}
+  .capa-org{margin-top:22px}
+
+  /* slide 9: categorias em 1 COLUNA (era 2, ficava apertado e cortado) */
+  #s9 .cat-wall{grid-template-columns:1fr;gap:14px;margin-top:20px}
+  .cat-top{padding:14px 16px}
+  .cat-nome{font-size:1.02rem}
+  .cat-cont{font-size:.66rem}
+  .pills{padding:14px 16px;gap:8px}
+  .pill{font-size:.82rem;padding:7px 13px;white-space:normal}
+
+  /* gráfico e timeline respiram */
+  .chart{height:clamp(150px,34vh,210px)}
+  .tl-trilho{grid-template-columns:repeat(5,1fr);gap:6px}
+
+  /* fluxo da escala empilha */
   .fluxo{flex-wrap:wrap;gap:12px}
-  .chart{gap:16px}
-  .stat .num{font-size:2rem}
+  .fluxo .seta-f{transform:rotate(90deg)}
+
+  /* números grandes não estouram */
+  .stat .num,.ind-card .num,.pnum,.n,.num{font-size:2rem}
+
+  /* contracapa (s13) centralizada mesmo com align-start */
+  #s13{align-items:center;justify-content:center;padding-top:96px;padding-bottom:118px}
+
+  /* CONTROLES e DICA com fundo sólido pra não colar no conteúdo */
+  .ctrl{padding:12px;gap:14px;background:linear-gradient(0deg,rgba(6,49,58,.92),rgba(6,49,58,0))}
+  .ctrl:not(.escuro){background:linear-gradient(0deg,var(--papel) 55%,rgba(241,244,245,0))}
+  .seta{width:42px;height:42px}
+  .dica{bottom:70px;font-size:.72rem;padding:8px 14px;max-width:88vw;text-align:center}
+
+  /* topbar compacta */
+  .topbar{padding:16px 20px}
+  .topbar:not(.escuro){padding-left:24px}
+  .brand{font-size:1.06rem}
 }
 @media (prefers-reduced-motion:reduce){
   .slide{transition:opacity .2s}
