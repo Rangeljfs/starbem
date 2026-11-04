@@ -308,6 +308,12 @@ img{max-width:100%;display:block}
   .bar{transition:none}
 }
 
+/* ====================== MARCA ASSOCIAÇÃO VOLVO ====================== */
+.hero-org{display:flex;align-items:center;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero-org span{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:700}
+.hero-org .org-logo{height:36px;width:auto;opacity:.95}
+.footer-logo{height:30px;width:auto;opacity:.9}
+
 /* ====================== AJUSTES DE REVISÃO ====================== */
 /* estrela no hero, junto ao nome */
 .hero-star{width:clamp(34px,5vw,56px);height:clamp(34px,5vw,56px);vertical-align:middle;margin-right:.18em;filter:drop-shadow(0 4px 12px rgba(255,196,0,.4))}
