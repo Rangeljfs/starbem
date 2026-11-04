@@ -17,9 +17,10 @@
   var elDica = document.querySelector('.dica');
 
   function atualizaChrome() {
-    var claro = slides[atual].classList.contains('bg-claro') || slides[atual].classList.contains('bg-branco');
-    elTop.classList.toggle('claro', claro);
-    elCtrl.classList.toggle('claro', claro);
+    var escuro = slides[atual].classList.contains('bg-escuro') || slides[atual].classList.contains('bg-azul');
+    elTop.classList.toggle('escuro', escuro);
+    elCtrl.classList.toggle('escuro', escuro);
+    document.body.classList.toggle('escuro-prog', escuro);
     elContador.textContent = (atual + 1) + ' / ' + total;
     elProg.style.width = ((atual + 1) / total * 100) + '%';
     elSetaPrev.disabled = atual === 0;
@@ -129,7 +130,7 @@
     var pc = parseInt(wrap.getAttribute('data-pc'), 10);
     var circ = wrap.querySelector('.prog');
     var txt = wrap.querySelector('.pc');
-    var r = 54, c = 2 * Math.PI * r;
+    var r = 52, c = 2 * Math.PI * r;
     circ.style.strokeDasharray = c;
     circ.style.strokeDashoffset = c;
     requestAnimationFrame(function () {

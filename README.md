@@ -34,10 +34,11 @@ starbem/
 
 ## Identidade visual
 
-- Linha "Executivo claro": azul-marinho institucional (base Volvo) sobre fundos claros (névoa e branco), com acento amarelo Volvo pontual e azul-aço de apoio
-- Tipografia: Fraunces (display, serif editorial) + Inter (texto)
-- Ícones de traço fino (linha), sem emojis
-- Animações: transições de slide, contadores, gráfico de barras, timeline e anéis de progresso
+- Linha "Editorial Volvo": inspirada no design system da Volvo Group (minimalista) e em decks editoriais. Paleta de três cores (tinta quase-preta, branco e azul Volvo), com amarelo só na marca
+- Fundos alternam: slides escuros (capa, pilares, dados, final) e claros (contexto, objetivos, atividades, indicadores)
+- Tipografia: Inter em pesos fortes (como a fonte própria da Volvo, Volvo Novum), sem serifa
+- Layout editorial: números grandes, rótulos em caixa-alta, separação por filetes finos (sem cards arredondados), ícones de traço fino
+- Animações: transição horizontal entre slides, entrada sequencial dos elementos, contadores, gráfico de barras, timeline e anéis de progresso
 
 ## Fontes dos dados (seção NR-1)
 
