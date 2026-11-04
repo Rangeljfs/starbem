@@ -366,6 +366,7 @@ svg.ic{display:block}
     align-items:flex-start;justify-content:flex-start;
     padding:84px 20px 118px;            /* topo abaixo da marca; base acima dos controles */
     -webkit-overflow-scrolling:touch;
+    overflow-x:hidden;                  /* o voo da estrela (sai pra fora) não cria barra lateral */
   }
   .slide-inner{max-width:100%}
   .bg-papel .slide-inner,.bg-branco .slide-inner{padding-left:14px}
