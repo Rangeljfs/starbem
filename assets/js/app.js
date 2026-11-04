@@ -16,11 +16,18 @@
   var elCtrl = document.querySelector('.ctrl');
   var elDica = document.querySelector('.dica');
 
+  var elAssina = document.querySelector('.assinatura');
   function atualizaChrome() {
-    var escuro = slides[atual].classList.contains('bg-escuro') || slides[atual].classList.contains('bg-azul');
+    var slideAtual = slides[atual];
+    var escuro = slideAtual.classList.contains('bg-escuro') || slideAtual.classList.contains('bg-azul');
     elTop.classList.toggle('escuro', escuro);
     elCtrl.classList.toggle('escuro', escuro);
     document.body.classList.toggle('escuro-prog', escuro);
+    // esconde a assinatura do rodapé nos slides que já trazem o logo grande da Volvo (capa e contracapa)
+    if (elAssina) {
+      var temLogo = slideAtual.id === 's1' || slideAtual.id === 's13';
+      elAssina.style.opacity = temLogo ? '0' : '';
+    }
     elContador.textContent = (atual + 1) + ' / ' + total;
     elProg.style.width = ((atual + 1) / total * 100) + '%';
     elSetaPrev.disabled = atual === 0;

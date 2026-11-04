@@ -20,7 +20,8 @@
   --azul-700:#0c5868;       /* teal escuro */
   --azul-suave:#cfe6ea;     /* teal bem claro p/ faixas/blocos */
   --azul-nevoa:#eef3f4;     /* fundo claro com leve viés teal */
-  --amarelo:#2fa8bf;        /* (antes amarelo) agora teal claro — destaque pontual, SEM cor quente */
+  --amarelo:#2fa8bf;        /* (antes amarelo) agora teal claro — destaque pontual */
+  --ouro:#ffc400;           /* amarelo real — SÓ na marca Star Bem (estrela + "Bem"), por decisão do Rangel */
 
   --papel:#f1f4f5;          /* fundo claro principal (branco-cinza, como o portal) */
   --papel-2:#fafbfc;        /* branco-cinza mais claro (do portal) */
@@ -124,11 +125,21 @@ svg.ic{display:block}
 .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.22rem;letter-spacing:-.02em;color:var(--tinta);text-decoration:none;line-height:1;pointer-events:auto}
 .brand .star{width:21px;height:21px;flex-shrink:0}
 .brand b{color:var(--tinta);font-weight:800}
-.topbar.escuro .brand,.topbar.escuro .brand b{color:#fff}
+.topbar.escuro .brand{color:#fff}
+.brand b{color:var(--ouro)}
+.topbar.escuro .brand b{color:var(--ouro)}
 
 /* ====================== BARRA DE PROGRESSO ====================== */
 .prog-top{position:fixed;top:0;left:0;height:3px;background:var(--azul);z-index:40;width:0;transition:width .5s cubic-bezier(.22,1,.36,1)}
 .escuro-prog .prog-top,.topbar.escuro ~ .prog-top{background:var(--amarelo)}
+
+/* ====================== ASSINATURA INSTITUCIONAL (rodapé em todos os slides) ====================== */
+.assinatura{
+  position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:29;
+  font-size:.66rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--tinta-45);pointer-events:none;white-space:nowrap;transition:color .4s ease;
+}
+body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 
 /* ====================== CONTROLES ====================== */
 .ctrl{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:22px;padding:24px}
@@ -153,7 +164,7 @@ svg.ic{display:block}
 .capa-badge .d{width:7px;height:7px;background:var(--amarelo);border-radius:50%}
 .capa h1{font-size:clamp(3.2rem,8vw,6rem);font-weight:800;color:#fff;letter-spacing:-.04em;display:flex;align-items:center;gap:.24em;flex-wrap:wrap;line-height:.98}
 .capa h1 .star-xl{width:clamp(44px,6vw,76px);height:clamp(44px,6vw,76px);flex-shrink:0}
-.capa h1 .bem{color:var(--amarelo)}
+.capa h1 .bem{color:var(--ouro)}
 
 /* --- animação de abertura: estrela "voa" e se encaixa no logo --- */
 /* repouso = estado FINAL (visível, no lugar): se a animação não rodar, a estrela fica certa,
@@ -163,12 +174,12 @@ svg.ic{display:block}
 #s1.voar .star-voo{animation:estrela-voo 1.9s cubic-bezier(.22,.9,.24,1) 0s forwards}
 #s1.voar .titulo-txt{opacity:0;animation:titulo-entra 1s cubic-bezier(.16,1,.3,1) 1.25s forwards}
 @keyframes estrela-voo{
-  0%  {opacity:0;transform:translate(340px,-340px) rotate(-340deg) scale(4.4);filter:drop-shadow(0 0 0 rgba(47,180,204,0))}
+  0%  {opacity:0;transform:translate(340px,-340px) rotate(-340deg) scale(4.4);filter:drop-shadow(0 0 0 rgba(255,196,0,0))}
   30% {opacity:1}
-  68% {transform:translate(0,0) rotate(0deg) scale(1.42);filter:drop-shadow(0 0 34px rgba(47,180,204,1))}
-  82% {transform:translate(0,0) rotate(0deg) scale(.86);filter:drop-shadow(0 0 16px rgba(47,180,204,.7))}
-  92% {transform:translate(0,0) rotate(0deg) scale(1.08);filter:drop-shadow(0 0 8px rgba(47,180,204,.4))}
-  100%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1);filter:drop-shadow(0 0 0 rgba(47,180,204,0))}
+  68% {transform:translate(0,0) rotate(0deg) scale(1.42);filter:drop-shadow(0 0 34px rgba(255,196,0,1))}
+  82% {transform:translate(0,0) rotate(0deg) scale(.86);filter:drop-shadow(0 0 16px rgba(255,196,0,.7))}
+  92% {transform:translate(0,0) rotate(0deg) scale(1.08);filter:drop-shadow(0 0 8px rgba(255,196,0,.4))}
+  100%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1);filter:drop-shadow(0 0 0 rgba(255,196,0,0))}
 }
 @keyframes titulo-entra{
   0%{opacity:0;transform:translateX(-34px)}
@@ -245,6 +256,22 @@ svg.ic{display:block}
 .promo-item.destaque p{color:#fff}
 .promo-item.destaque p strong{color:var(--amarelo)}
 
+/* frente 03 em DESTAQUE FORTE — ponto principal da norma (caixa + cor contrastante) */
+.promo-item.destaque-forte{
+  position:relative;border-top:0;align-items:flex-start;
+  margin:6px 0;padding:16px 18px 16px 20px;border-radius:4px;
+  background:linear-gradient(135deg,rgba(255,196,0,.16),rgba(255,196,0,.06));
+  box-shadow:inset 4px 0 0 var(--ouro),0 6px 20px rgba(0,0,0,.18);
+}
+.promo-item.destaque-forte .n{color:var(--ouro)}
+.promo-item.destaque-forte p{color:#fff;font-weight:500}
+.promo-item.destaque-forte p strong{color:var(--ouro)}
+.promo-item.destaque-forte .tag-foco{
+  position:absolute;top:-10px;right:14px;
+  font-size:.56rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#06313a;background:var(--ouro);padding:4px 9px;border-radius:2px;line-height:1;
+}
+
 /* ====================== 8 · CRONOGRAMA ====================== */
 .pub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:38px}
 .pub-card{padding:0 30px;border-left:1px solid var(--linha);display:flex;align-items:flex-start;gap:16px}
@@ -317,7 +344,7 @@ svg.ic{display:block}
 .capa-fim{display:flex;flex-direction:column;align-items:center;text-align:center}
 .star-fim{width:clamp(48px,6vw,70px);height:clamp(48px,6vw,70px);margin-bottom:26px}
 .fim-marca{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1}
-.fim-marca .bem{color:var(--azul-claro)}
+.fim-marca .bem{color:var(--ouro)}
 .fim-frase{font-size:clamp(1.05rem,1.9vw,1.35rem);color:rgba(255,255,255,.78);margin-top:22px;max-width:30ch;line-height:1.5}
 .fim-org{display:inline-flex;flex-direction:column;align-items:center;gap:14px;margin-top:clamp(42px,6vh,64px);padding-top:30px;border-top:1px solid rgba(255,255,255,.2)}
 .fim-org span{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:700}
