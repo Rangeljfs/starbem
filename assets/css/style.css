@@ -12,6 +12,8 @@
   --azul-300:#5b8fd1;
   --coral:#ff6b5e;      /* acento quente — bem-estar / pessoas */
   --coral-escuro:#e24a3c;
+  --amarelo:#ffc400;    /* destaque / marca Star Bem */
+  --amarelo-suave:#fff3c4;
   --ambar:#f6a623;      /* energia / atividades */
   --verde:#2bb673;      /* saúde / positivo */
   --verde-escuro:#1f8f5a;
@@ -306,6 +308,38 @@ img{max-width:100%;display:block}
   .bar{transition:none}
 }
 
+/* ====================== AJUSTES DE REVISÃO ====================== */
+/* estrela no hero, junto ao nome */
+.hero-star{width:clamp(34px,5vw,56px);height:clamp(34px,5vw,56px);vertical-align:middle;margin-right:.18em;filter:drop-shadow(0 4px 12px rgba(255,196,0,.4))}
+.hero h1 .bem{color:var(--amarelo)}
+
+/* títulos em destaque preto */
+.titulo-preto{color:var(--tinta)}
+
+/* frentes da NR-1 — destaque amarelo nas selecionadas */
+.promo-item.destaque{background:var(--amarelo);border-color:var(--amarelo);box-shadow:0 10px 26px rgba(255,196,0,.35)}
+.promo-item.destaque .n{background:var(--tinta);color:var(--amarelo)}
+.promo-item.destaque p,.promo-item.destaque p strong{color:var(--tinta)}
+.promo-item.destaque:hover{transform:translateX(4px) translateY(-3px);box-shadow:0 16px 36px rgba(255,196,0,.5)}
+
+/* atividades por categoria */
+.cat-bloco{margin-top:34px}
+.cat-cab{margin-bottom:14px}
+.cat-tag{display:inline-block;font-family:var(--fonte-display);font-weight:800;font-size:.95rem;letter-spacing:.02em;padding:8px 18px;border-radius:999px}
+.cat-tag.tag-online{background:rgba(31,95,166,.12);color:var(--azul-500)}
+.cat-tag.tag-pres{background:rgba(246,166,35,.18);color:#b8730a}
+.cat-tag.tag-fis{background:rgba(43,182,115,.16);color:var(--verde-escuro)}
+.cat-tag.tag-desafio{background:var(--amarelo-suave);color:#9a6b00}
+.cat-bloco .ativ-grid{margin-top:0}
+
+/* sub-bloco e caixas da escala de bem-estar */
+.sub-bloco{font-size:1.35rem;color:var(--azul-900);margin-top:52px;margin-bottom:8px}
+.escala-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.escala-card{background:var(--card);border:1px solid var(--linha);border-top:4px solid var(--amarelo);border-radius:var(--raio);padding:24px;text-align:center;box-shadow:var(--sombra)}
+.escala-card .ic{font-size:1.8rem;margin-bottom:6px}
+.escala-card .k{font-family:var(--fonte-display);font-weight:800;font-size:1.25rem;color:var(--azul-900)}
+.escala-card .r{font-size:.86rem;color:var(--tinta-suave);margin-top:6px}
+
 /* ====================== RESPONSIVO ====================== */
 @media (max-width:900px){
   .hero-inner{grid-template-columns:1fr}
@@ -314,7 +348,7 @@ img{max-width:100%;display:block}
   .promo-img{position:static}
   .ctx-img{max-width:480px}
   .pilares-inner{grid-template-columns:1fr}
-  .pub-grid,.ind-grid{grid-template-columns:1fr}
+  .pub-grid,.ind-grid,.escala-grid{grid-template-columns:1fr}
 }
 @media (max-width:720px){
   .nav-links{display:none;position:absolute;top:66px;left:0;right:0;background:#fff;flex-direction:column;
