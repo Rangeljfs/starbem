@@ -154,13 +154,15 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .ctrl.escuro .contador{color:rgba(255,255,255,.65)}
 
 /* botão de baixar PDF */
-.btn-pdf{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px;margin-left:8px;
-  border:1px solid var(--linha-forte);border-radius:2px;background:var(--branco);color:var(--tinta);
-  font-family:inherit;font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.2s}
-.btn-pdf svg{width:16px;height:16px}
-.btn-pdf:hover{background:var(--tinta);border-color:var(--tinta);color:#fff}
-.ctrl.escuro .btn-pdf{background:transparent;border-color:rgba(255,255,255,.3);color:#fff}
-.ctrl.escuro .btn-pdf:hover{background:var(--ouro);border-color:var(--ouro);color:#06313a}
+/* botão PDF fixo no canto superior direito em TODAS as telas (desktop e mobile) */
+.btn-pdf{position:fixed;top:18px;right:24px;z-index:40;display:inline-flex;align-items:center;gap:7px;
+  height:40px;padding:0 17px;border:1px solid var(--ouro);border-radius:2px;
+  background:var(--ouro);color:#06313a;box-shadow:0 4px 14px rgba(0,0,0,.22);
+  font-family:inherit;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn-pdf svg{width:17px;height:17px}
+.btn-pdf:hover{background:#ffcf33;border-color:#ffcf33;color:#06313a;transform:translateY(-1px)}
+/* mantém amarelo independente do tema da barra (o botão saiu da .ctrl visualmente) */
+.ctrl.escuro .btn-pdf,.ctrl.escuro .btn-pdf:hover{background:var(--ouro);border-color:var(--ouro);color:#06313a}
 .btn-pdf:disabled{opacity:.5;cursor:default}
 
 /* overlay enquanto gera — só aparece quando tem a classe .on (nunca sozinho) */
@@ -477,13 +479,8 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
   .ctrl:not(.escuro){background:linear-gradient(0deg,var(--papel) 55%,rgba(241,244,245,0))}
   .seta{width:42px;height:42px}
 
-  /* no celular o botão PDF sai da barra apertada e vira um botão fixo e DESTACADO
-     no canto superior direito, impossível de não achar e sem disputar espaço */
-  .btn-pdf{position:fixed;top:14px;right:16px;z-index:40;margin-left:0;height:40px;padding:0 16px;
-    background:var(--ouro)!important;border-color:var(--ouro)!important;color:#06313a!important;
-    box-shadow:0 4px 14px rgba(0,0,0,.25);font-size:.8rem}
-  .ctrl.escuro .btn-pdf{background:var(--ouro)!important;border-color:var(--ouro)!important;color:#06313a!important}
-  .btn-pdf svg{width:17px;height:17px}
+  /* no celular, botão PDF um pouco mais colado na borda pra não encostar na logo */
+  .btn-pdf{top:14px;right:16px;height:38px;padding:0 14px;font-size:.76rem}
 
   /* topbar compacta */
   .topbar{padding:16px 20px}
