@@ -153,6 +153,42 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .contador{font-weight:600;font-size:.82rem;letter-spacing:.14em;color:var(--tinta-45);font-variant-numeric:tabular-nums}
 .ctrl.escuro .contador{color:rgba(255,255,255,.65)}
 
+/* botão de baixar PDF */
+.btn-pdf{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px;margin-left:8px;
+  border:1px solid var(--linha-forte);border-radius:2px;background:var(--branco);color:var(--tinta);
+  font-family:inherit;font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn-pdf svg{width:16px;height:16px}
+.btn-pdf:hover{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.ctrl.escuro .btn-pdf{background:transparent;border-color:rgba(255,255,255,.3);color:#fff}
+.ctrl.escuro .btn-pdf:hover{background:var(--ouro);border-color:var(--ouro);color:#06313a}
+.btn-pdf:disabled{opacity:.5;cursor:default}
+
+/* overlay enquanto gera */
+.pdf-loading{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  background:rgba(6,49,58,.82);color:#fff;font-weight:600;letter-spacing:.06em;backdrop-filter:blur(2px)}
+.pdf-spin{width:44px;height:44px;border:3px solid rgba(255,255,255,.25);border-top-color:var(--ouro);border-radius:50%;animation:pdfspin .8s linear infinite}
+@keyframes pdfspin{to{transform:rotate(360deg)}}
+
+/* palco de impressão (fora da tela, mas em fluxo normal p/ o html2pdf quebrar páginas) */
+.pdf-stage{position:absolute;left:-20000px;top:0;width:1123px}
+.pdf-page{width:1123px;height:794px;overflow:hidden;position:relative;background:var(--papel);
+  display:flex;align-items:center;justify-content:center;padding:56px 72px;
+  page-break-after:always;break-after:page}
+.pdf-page:last-child{page-break-after:auto;break-after:auto}
+.pdf-page.bg-escuro{background:radial-gradient(120% 120% at 15% 0%,var(--escuro-2) 0%,var(--escuro) 58%)}
+.pdf-page.bg-papel{background:var(--papel)}
+.pdf-page.bg-branco{background:var(--papel-2)}
+.pdf-page .slide-inner{width:100%;max-width:var(--max);margin:0 auto}
+/* nas páginas de impressão tudo já entra no estado final (sem animação) */
+.pdf-page .anim,.pdf-page .star-voo,.pdf-page .titulo-txt{opacity:1!important;transform:none!important;animation:none!important;filter:none!important}
+.pdf-page .ctx-img img,.pdf-page .capa-art img,.pdf-page .promo-img img,.pdf-page .social-img img{clip-path:none!important;transform:none!important}
+.pdf-page .bar{transition:none!important}
+/* faixa lateral e marca institucional de rodapé em cada folha clara */
+.pdf-page.bg-papel::before,.pdf-page.bg-branco::before{content:"";position:absolute;top:0;bottom:0;left:0;width:34px;background:linear-gradient(180deg,var(--azul),var(--azul-700));z-index:1}
+.pdf-page .slide-inner{position:relative;z-index:2}
+.pdf-rodape{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--tinta-45);z-index:3}
+.pdf-page.bg-escuro .pdf-rodape{color:rgba(255,255,255,.5)}
+
 /* ====================== ÍCONES (traço fino) ====================== */
 .ic-wrap{display:inline-grid;place-items:center;width:40px;height:40px;flex-shrink:0}
 .ic-wrap svg{width:30px;height:30px;stroke-width:1.5;fill:none;stroke:var(--azul)}
@@ -259,13 +295,12 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 /* frente 03 em DESTAQUE FORTE — ponto principal da norma (caixa + cor contrastante) */
 .promo-item.destaque-forte{
   position:relative;border-top:0;align-items:flex-start;
-  margin:6px 0;padding:16px 18px 16px 20px;border-radius:4px;
-  background:linear-gradient(135deg,rgba(255,196,0,.16),rgba(255,196,0,.06));
-  box-shadow:inset 4px 0 0 var(--ouro),0 6px 20px rgba(0,0,0,.18);
+  margin:8px 0;padding:18px 18px 18px 20px;border-radius:4px;
+  background:#0a2e38;border:2px solid var(--ouro);border-left-width:6px;
 }
 .promo-item.destaque-forte .n{color:var(--ouro)}
-.promo-item.destaque-forte p{color:#fff;font-weight:500}
-.promo-item.destaque-forte p strong{color:var(--ouro)}
+.promo-item.destaque-forte p{color:#fff;font-weight:600}
+.promo-item.destaque-forte p strong{color:var(--ouro);font-weight:800}
 .promo-item.destaque-forte .tag-foco{
   position:absolute;top:-10px;right:14px;
   font-size:.56rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;

@@ -176,6 +176,95 @@
   var anoEl = document.getElementById('ano');
   if (anoEl) anoEl.textContent = new Date().getFullYear();
 
+  /* ===================== EXPORTAR PDF (A4 paisagem, 1 slide por folha) ===================== */
+  var btnPdf = document.querySelector('.btn-pdf');
+  var pdfLoad = document.querySelector('.pdf-loading');
+
+  function fmtAlvo(el) {
+    var alvo = parseFloat(el.getAttribute('data-alvo'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var pref = el.getAttribute('data-pref') || '';
+    var suf = el.getAttribute('data-suf') || '';
+    return pref + alvo.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
+  }
+
+  function preparaClone(page) {
+    // contadores no valor final
+    page.querySelectorAll('[data-alvo]').forEach(function (el) { el.textContent = fmtAlvo(el); });
+    // barras do gráfico na altura final
+    page.querySelectorAll('.bar').forEach(function (b) {
+      var h = b.getAttribute('data-h'); if (h) { b.style.height = h + '%'; b.classList.add('show'); }
+    });
+    // timeline toda acesa
+    page.querySelectorAll('.tl-sem').forEach(function (s) { s.classList.add('on'); });
+    // anéis de progresso no valor final
+    page.querySelectorAll('.ind-ring[data-pc]').forEach(function (w) {
+      var pc = parseInt(w.getAttribute('data-pc'), 10);
+      var circ = w.querySelector('.prog'); var pcTxt = w.querySelector('.pc');
+      if (circ) { var r = 52, c = 2 * Math.PI * r; circ.style.strokeDasharray = c; circ.style.strokeDashoffset = c * (1 - pc / 100); }
+      if (pcTxt) pcTxt.textContent = pc + '%';
+    });
+  }
+
+  function gerarPDF() {
+    var temCanvas = typeof html2canvas !== 'undefined';
+    var JsPDFCtor = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    if (!temCanvas || !JsPDFCtor) {
+      alert('Não foi possível carregar o gerador de PDF. Verifique a conexão e tente de novo.'); return;
+    }
+    btnPdf.disabled = true;
+    if (pdfLoad) pdfLoad.hidden = false;
+
+    var jsPDF = JsPDFCtor;
+    var PW = 1123, PH = 794; // A4 paisagem em px (96dpi)
+    var pdf = new jsPDF({ unit: 'px', format: [PW, PH], orientation: 'landscape' });
+
+    // monta o palco (fora da tela) com uma folha por slide
+    var stage = document.createElement('div');
+    stage.className = 'pdf-stage';
+    var paginas = slides.map(function (sl) {
+      var page = document.createElement('div');
+      page.className = 'pdf-page ' + (sl.classList.contains('bg-escuro') ? 'bg-escuro' : sl.classList.contains('bg-branco') ? 'bg-branco' : 'bg-papel');
+      page.innerHTML = '<div class="slide-inner ' + sl.querySelector('.slide-inner').className.replace('slide-inner', '').trim() + '">' + sl.querySelector('.slide-inner').innerHTML + '</div>';
+      preparaClone(page);
+      var rod = document.createElement('div');
+      rod.className = 'pdf-rodape'; rod.textContent = 'Associação Volvo';
+      page.appendChild(rod);
+      stage.appendChild(page);
+      return page;
+    });
+    document.body.appendChild(stage);
+
+    // renderiza cada folha individualmente e adiciona ao PDF (1 slide = 1 página)
+    var idx = 0;
+    function proxima() {
+      if (idx >= paginas.length) {
+        pdf.save('Star-Bem-apresentacao.pdf');
+        stage.remove();
+        if (pdfLoad) pdfLoad.hidden = true;
+        btnPdf.disabled = false;
+        return;
+      }
+      html2canvas(paginas[idx], { scale: 2, useCORS: true, backgroundColor: null, width: PW, height: PH, windowWidth: PW, windowHeight: PH })
+        .then(function (canvas) {
+          var img = canvas.toDataURL('image/jpeg', 0.95);
+          if (idx > 0) pdf.addPage([PW, PH], 'landscape');
+          pdf.addImage(img, 'JPEG', 0, 0, PW, PH);
+          idx++;
+          proxima();
+        })
+        .catch(function (e) {
+          stage.remove();
+          if (pdfLoad) pdfLoad.hidden = true;
+          btnPdf.disabled = false;
+          alert('Falha ao gerar o PDF. Tente novamente.');
+        });
+    }
+    proxima();
+  }
+
+  if (btnPdf) btnPdf.addEventListener('click', gerarPDF);
+
   /* ir para slide pelo hash (#s3) */
   function doHash() {
     var m = (location.hash || '').match(/^#s(\d+)$/);
