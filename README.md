@@ -1,8 +1,8 @@
 # Star Bem
 
-Site institucional do **Star Bem** — programa de bem-estar e saúde psicossocial da Volvo, alinhado às diretrizes da **NR-1** (riscos psicossociais).
+Apresentação corporativa do **Star Bem** — programa de bem-estar e saúde psicossocial, uma iniciativa da **Associação Volvo**, alinhado às diretrizes da **NR-1** (riscos psicossociais).
 
-Página única, animada e responsiva, que apresenta o projeto de forma navegável e interliga todas as seções: do contexto legal ao cronograma, atividades, ação social e indicadores.
+Formato **deck de slides** (uma tela por vez, em tela cheia), animado, para projetar em reunião. Navegação por setas ← →, teclado, clique nos pontos ou swipe no celular. 12 slides, do contexto legal ao cronograma, atividades, ação social e indicadores.
 
 ## No ar
 
