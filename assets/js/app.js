@@ -214,10 +214,12 @@
   }
   function limpaPdf(stage) {
     if (stage && stage.parentNode) stage.remove();
-    if (pdfLoad) { pdfLoad.hidden = true; setPdfMsg('Gerando PDF…'); }
+    if (pdfLoad) { pdfLoad.hidden = true; pdfLoad.classList.remove('on'); setPdfMsg('Gerando PDF…'); }
     if (btnPdf) btnPdf.disabled = false;
     gerando = false;
   }
+  // garante que o overlay NUNCA esteja visível ao abrir a página
+  if (pdfLoad) { pdfLoad.hidden = true; pdfLoad.classList.remove('on'); }
 
   function gerarPDF() {
     if (gerando) return; // evita duplo clique
@@ -228,7 +230,7 @@
     }
     gerando = true;
     btnPdf.disabled = true;
-    if (pdfLoad) { pdfLoad.hidden = false; setPdfMsg('Gerando PDF…'); }
+    if (pdfLoad) { pdfLoad.hidden = false; pdfLoad.classList.add('on'); setPdfMsg('Gerando PDF…'); }
 
     var PW = 1123, PH = 794; // A4 paisagem em px (96dpi)
     // escala adaptativa: celular/telas pequenas usam escala menor pra não travar nem estourar memória

@@ -163,9 +163,11 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .ctrl.escuro .btn-pdf:hover{background:var(--ouro);border-color:var(--ouro);color:#06313a}
 .btn-pdf:disabled{opacity:.5;cursor:default}
 
-/* overlay enquanto gera */
-.pdf-loading{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+/* overlay enquanto gera — só aparece quando tem a classe .on (nunca sozinho) */
+.pdf-loading{position:fixed;inset:0;z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;
   background:rgba(6,49,58,.82);color:#fff;font-weight:600;letter-spacing:.06em;backdrop-filter:blur(2px)}
+.pdf-loading.on{display:flex}
+.pdf-loading[hidden]{display:none}
 .pdf-spin{width:44px;height:44px;border:3px solid rgba(255,255,255,.25);border-top-color:var(--ouro);border-radius:50%;animation:pdfspin .8s linear infinite}
 @keyframes pdfspin{to{transform:rotate(360deg)}}
 
@@ -470,10 +472,18 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
   /* contracapa (s13) centralizada mesmo com align-start */
   #s13{align-items:center;justify-content:center;padding-top:96px;padding-bottom:118px}
 
-  /* CONTROLES e DICA com fundo sólido pra não colar no conteúdo */
+  /* CONTROLES com fundo sólido pra não colar no conteúdo */
   .ctrl{padding:12px;gap:14px;background:linear-gradient(0deg,rgba(6,49,58,.92),rgba(6,49,58,0))}
   .ctrl:not(.escuro){background:linear-gradient(0deg,var(--papel) 55%,rgba(241,244,245,0))}
   .seta{width:42px;height:42px}
+
+  /* no celular o botão PDF sai da barra apertada e vira um botão fixo e DESTACADO
+     no canto superior direito, impossível de não achar e sem disputar espaço */
+  .btn-pdf{position:fixed;top:14px;right:16px;z-index:40;margin-left:0;height:40px;padding:0 16px;
+    background:var(--ouro)!important;border-color:var(--ouro)!important;color:#06313a!important;
+    box-shadow:0 4px 14px rgba(0,0,0,.25);font-size:.8rem}
+  .ctrl.escuro .btn-pdf{background:var(--ouro)!important;border-color:var(--ouro)!important;color:#06313a!important}
+  .btn-pdf svg{width:17px;height:17px}
 
   /* topbar compacta */
   .topbar{padding:16px 20px}
