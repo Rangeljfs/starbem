@@ -34,9 +34,10 @@ starbem/
 
 ## Identidade visual
 
-- Azul institucional (base Volvo) + acentos de bem-estar (coral, âmbar, verde)
-- Tipografia: Montserrat (display) + Inter (texto)
-- Animações: reveal on scroll, contadores, gráfico de barras, timeline e anéis de progresso
+- Linha "Executivo claro": azul-marinho institucional (base Volvo) sobre fundos claros (névoa e branco), com acento amarelo Volvo pontual e azul-aço de apoio
+- Tipografia: Fraunces (display, serif editorial) + Inter (texto)
+- Ícones de traço fino (linha), sem emojis
+- Animações: transições de slide, contadores, gráfico de barras, timeline e anéis de progresso
 
 ## Fontes dos dados (seção NR-1)
 
