@@ -188,7 +188,40 @@
     return pref + alvo.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
   }
 
+  // mapa id->symbol (do sprite) pra inlinar os ícones no PDF
+  var symbolMap = {};
+  (function () {
+    document.querySelectorAll('svg[aria-hidden="true"] symbol').forEach(function (sym) {
+      symbolMap[sym.id] = { vb: sym.getAttribute('viewBox') || '0 0 24 24', inner: sym.innerHTML };
+    });
+  })();
+
+  // html2canvas NÃO renderiza <use href="#..."> de <symbol>. Então, no clone,
+  // troca cada <svg><use/></svg> por um SVG inline com os paths de verdade e
+  // com stroke/fill aplicados como ATRIBUTOS (o canvas ignora o CSS herdado).
+  function inlineIcones(page) {
+    page.querySelectorAll('use').forEach(function (use) {
+      var href = use.getAttribute('href') || use.getAttribute('xlink:href') || '';
+      var id = href.replace('#', '');
+      var sym = symbolMap[id];
+      var svg = use.closest('svg');
+      if (!sym || !svg) return;
+      var cs = getComputedStyle(svg);
+      var stroke = cs.stroke && cs.stroke !== 'none' ? cs.stroke : '';
+      var fill = cs.fill || 'none';
+      var sw = cs.strokeWidth || '1.5';
+      // se não tem stroke nem fill útil, assume traço escuro pra não sumir
+      if ((!stroke || stroke === 'rgb(0, 0, 0)') && fill === 'none') stroke = stroke || '#0f6f82';
+      svg.setAttribute('viewBox', sym.vb);
+      if (stroke) { svg.setAttribute('stroke', stroke); svg.setAttribute('stroke-width', sw); svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round'); }
+      svg.setAttribute('fill', fill);
+      svg.innerHTML = sym.inner; // substitui o <use> pelos paths reais
+    });
+  }
+
   function preparaClone(page) {
+    // ícones inline (ANTES de medir/renderizar)
+    inlineIcones(page);
     // contadores no valor final
     page.querySelectorAll('[data-alvo]').forEach(function (el) { el.textContent = fmtAlvo(el); });
     // barras do gráfico na altura final
@@ -239,12 +272,6 @@
     try { pdf = new JsPDFCtor({ unit: 'px', format: [PW, PH], orientation: 'landscape', compress: true }); }
     catch (e) { limpaPdf(null); alert('Não foi possível iniciar o PDF. Tente novamente.'); return; }
 
-    // sprite de ícones (<symbol id="i-...">): precisa estar DENTRO do clone,
-    // senão os <use href="#i-..."> não resolvem e os ícones saem vazios no PDF
-    var spriteHTML = '';
-    var spriteEl = document.querySelector('svg[aria-hidden="true"]');
-    if (spriteEl) spriteHTML = spriteEl.outerHTML;
-
     // uma folha de impressão de cada vez (economiza memória no celular)
     function montaPagina(i) {
       var sl = slides[i];
@@ -252,13 +279,13 @@
       stage.className = 'pdf-stage';
       var page = document.createElement('div');
       page.className = 'pdf-page ' + (sl.classList.contains('bg-escuro') ? 'bg-escuro' : sl.classList.contains('bg-branco') ? 'bg-branco' : 'bg-papel');
-      page.innerHTML = spriteHTML + '<div class="slide-inner ' + sl.querySelector('.slide-inner').className.replace('slide-inner', '').trim() + '">' + sl.querySelector('.slide-inner').innerHTML + '</div>';
-      preparaClone(page);
+      page.innerHTML = '<div class="slide-inner ' + sl.querySelector('.slide-inner').className.replace('slide-inner', '').trim() + '">' + sl.querySelector('.slide-inner').innerHTML + '</div>';
       var rod = document.createElement('div');
       rod.className = 'pdf-rodape'; rod.textContent = 'Associação Volvo';
       page.appendChild(rod);
       stage.appendChild(page);
-      document.body.appendChild(stage);
+      document.body.appendChild(stage);   // precisa estar NO DOM antes de preparaClone
+      preparaClone(page);                  // inlina ícones usando getComputedStyle
       return { stage: stage, page: page };
     }
 
