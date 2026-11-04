@@ -206,61 +206,86 @@
     });
   }
 
+  var gerando = false;
+  function setPdfMsg(txt) {
+    if (!pdfLoad) return;
+    var s = pdfLoad.querySelector('span');
+    if (s) s.textContent = txt;
+  }
+  function limpaPdf(stage) {
+    if (stage && stage.parentNode) stage.remove();
+    if (pdfLoad) { pdfLoad.hidden = true; setPdfMsg('Gerando PDF…'); }
+    if (btnPdf) btnPdf.disabled = false;
+    gerando = false;
+  }
+
   function gerarPDF() {
+    if (gerando) return; // evita duplo clique
     var temCanvas = typeof html2canvas !== 'undefined';
     var JsPDFCtor = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
     if (!temCanvas || !JsPDFCtor) {
-      alert('Não foi possível carregar o gerador de PDF. Verifique a conexão e tente de novo.'); return;
+      alert('Não foi possível carregar o gerador de PDF. Verifique a conexão e tente novamente.'); return;
     }
+    gerando = true;
     btnPdf.disabled = true;
-    if (pdfLoad) pdfLoad.hidden = false;
+    if (pdfLoad) { pdfLoad.hidden = false; setPdfMsg('Gerando PDF…'); }
 
-    var jsPDF = JsPDFCtor;
     var PW = 1123, PH = 794; // A4 paisagem em px (96dpi)
-    var pdf = new jsPDF({ unit: 'px', format: [PW, PH], orientation: 'landscape' });
+    // escala adaptativa: celular/telas pequenas usam escala menor pra não travar nem estourar memória
+    var escala = (window.innerWidth < 760 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) ? 1.1 : 1.8;
+    var pdf;
+    try { pdf = new JsPDFCtor({ unit: 'px', format: [PW, PH], orientation: 'landscape', compress: true }); }
+    catch (e) { limpaPdf(null); alert('Não foi possível iniciar o PDF. Tente novamente.'); return; }
 
-    // monta o palco (fora da tela) com uma folha por slide
-    var stage = document.createElement('div');
-    stage.className = 'pdf-stage';
-    var paginas = slides.map(function (sl) {
+    // sprite de ícones (<symbol id="i-...">): precisa estar DENTRO do clone,
+    // senão os <use href="#i-..."> não resolvem e os ícones saem vazios no PDF
+    var spriteHTML = '';
+    var spriteEl = document.querySelector('svg[aria-hidden="true"]');
+    if (spriteEl) spriteHTML = spriteEl.outerHTML;
+
+    // uma folha de impressão de cada vez (economiza memória no celular)
+    function montaPagina(i) {
+      var sl = slides[i];
+      var stage = document.createElement('div');
+      stage.className = 'pdf-stage';
       var page = document.createElement('div');
       page.className = 'pdf-page ' + (sl.classList.contains('bg-escuro') ? 'bg-escuro' : sl.classList.contains('bg-branco') ? 'bg-branco' : 'bg-papel');
-      page.innerHTML = '<div class="slide-inner ' + sl.querySelector('.slide-inner').className.replace('slide-inner', '').trim() + '">' + sl.querySelector('.slide-inner').innerHTML + '</div>';
+      page.innerHTML = spriteHTML + '<div class="slide-inner ' + sl.querySelector('.slide-inner').className.replace('slide-inner', '').trim() + '">' + sl.querySelector('.slide-inner').innerHTML + '</div>';
       preparaClone(page);
       var rod = document.createElement('div');
       rod.className = 'pdf-rodape'; rod.textContent = 'Associação Volvo';
       page.appendChild(rod);
       stage.appendChild(page);
-      return page;
-    });
-    document.body.appendChild(stage);
+      document.body.appendChild(stage);
+      return { stage: stage, page: page };
+    }
 
-    // renderiza cada folha individualmente e adiciona ao PDF (1 slide = 1 página)
     var idx = 0;
     function proxima() {
-      if (idx >= paginas.length) {
-        pdf.save('Star-Bem-apresentacao.pdf');
-        stage.remove();
-        if (pdfLoad) pdfLoad.hidden = true;
-        btnPdf.disabled = false;
+      if (idx >= slides.length) {
+        try { pdf.save('Star-Bem-apresentacao.pdf'); } catch (e) {}
+        limpaPdf(null);
         return;
       }
-      html2canvas(paginas[idx], { scale: 2, useCORS: true, backgroundColor: null, width: PW, height: PH, windowWidth: PW, windowHeight: PH })
+      setPdfMsg('Gerando PDF… ' + (idx + 1) + '/' + slides.length);
+      var m = montaPagina(idx);
+      html2canvas(m.page, { scale: escala, useCORS: true, backgroundColor: null, width: PW, height: PH, windowWidth: PW, windowHeight: PH, logging: false })
         .then(function (canvas) {
-          var img = canvas.toDataURL('image/jpeg', 0.95);
+          var img = canvas.toDataURL('image/jpeg', 0.9);
           if (idx > 0) pdf.addPage([PW, PH], 'landscape');
           pdf.addImage(img, 'JPEG', 0, 0, PW, PH);
+          m.stage.remove();
           idx++;
-          proxima();
+          // respiro pro navegador não travar (importante no celular)
+          setTimeout(proxima, 30);
         })
         .catch(function (e) {
-          stage.remove();
-          if (pdfLoad) pdfLoad.hidden = true;
-          btnPdf.disabled = false;
-          alert('Falha ao gerar o PDF. Tente novamente.');
+          limpaPdf(m.stage);
+          alert('Falha ao gerar o PDF. Se estiver no celular, tente pelo computador. (' + (e && e.message ? e.message : 'erro') + ')');
         });
     }
-    proxima();
+    // começa após o overlay pintar
+    setTimeout(proxima, 60);
   }
 
   if (btnPdf) btnPdf.addEventListener('click', gerarPDF);
