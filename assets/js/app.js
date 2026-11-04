@@ -27,7 +27,18 @@
     elSetaNext.disabled = atual === total - 1;
   }
 
+  function voaEstrela() {
+    // decisão do cliente: a estrela da capa anima sempre, mesmo com reduced-motion
+    var capa = slides[0];
+    if (!capa) return;
+    capa.classList.remove('voar');
+    void capa.offsetWidth; // reflow pra reiniciar a animação
+    capa.classList.add('voar');
+  }
+
   function dispara(slide) {
+    // anima estrela da capa sempre que o slide 1 fica ativo
+    if (slide === slides[0]) voaEstrela();
     // contadores
     slide.querySelectorAll('[data-alvo]').forEach(function (el) {
       if (el._feito) return; el._feito = true;
