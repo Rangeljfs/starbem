@@ -292,9 +292,16 @@ svg.ic{display:block}
 .benef{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-top:1px solid rgba(255,255,255,.16)}
 .benef b{display:block;font-size:1.1rem;font-weight:800;margin-bottom:5px;color:#fff;letter-spacing:-.01em}
 .benef span{font-size:.9rem;color:rgba(255,255,255,.76);line-height:1.55}
-.final-org{display:inline-flex;align-items:center;gap:18px;margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.18)}
-.final-org span{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;max-width:7em;line-height:1.5}
-.final-org img{height:50px;width:auto}
+
+/* ====================== 13 · CONTRACAPA (encerramento) ====================== */
+.capa-fim{display:flex;flex-direction:column;align-items:center;text-align:center}
+.star-fim{width:clamp(48px,6vw,70px);height:clamp(48px,6vw,70px);margin-bottom:26px}
+.fim-marca{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1}
+.fim-marca .bem{color:var(--azul-claro)}
+.fim-frase{font-size:clamp(1.05rem,1.9vw,1.35rem);color:rgba(255,255,255,.78);margin-top:22px;max-width:30ch;line-height:1.5}
+.fim-org{display:inline-flex;flex-direction:column;align-items:center;gap:14px;margin-top:clamp(42px,6vh,64px);padding-top:30px;border-top:1px solid rgba(255,255,255,.2)}
+.fim-org span{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:700}
+.fim-org img{height:clamp(58px,7vw,78px);width:auto}
 
 /* ====================== DICA ====================== */
 .dica{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);z-index:25;background:rgba(21,23,26,.82);color:#fff;font-size:.76rem;padding:9px 18px;border-radius:2px;transition:opacity .5s;pointer-events:none;letter-spacing:.02em}
