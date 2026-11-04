@@ -10,29 +10,16 @@
 
   var elSetaPrev = document.querySelector('.seta.prev');
   var elSetaNext = document.querySelector('.seta.next');
-  var elDots = document.querySelector('.dots');
   var elContador = document.querySelector('.contador');
   var elProg = document.querySelector('.prog-top');
   var elTop = document.querySelector('.topbar');
   var elCtrl = document.querySelector('.ctrl');
   var elDica = document.querySelector('.dica');
 
-  /* cria os dots */
-  var dots = [];
-  slides.forEach(function (s, i) {
-    var b = document.createElement('button');
-    b.className = 'dot' + (i === 0 ? ' on' : '');
-    b.setAttribute('aria-label', 'Ir para o slide ' + (i + 1));
-    b.addEventListener('click', function () { irPara(i); });
-    elDots.appendChild(b);
-    dots.push(b);
-  });
-
   function atualizaChrome() {
     var claro = slides[atual].classList.contains('bg-claro') || slides[atual].classList.contains('bg-branco');
     elTop.classList.toggle('claro', claro);
     elCtrl.classList.toggle('claro', claro);
-    dots.forEach(function (d, i) { d.classList.toggle('on', i === atual); });
     elContador.textContent = (atual + 1) + ' / ' + total;
     elProg.style.width = ((atual + 1) / total * 100) + '%';
     elSetaPrev.disabled = atual === 0;
