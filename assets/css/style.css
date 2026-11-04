@@ -7,25 +7,26 @@
    ============================================================ */
 
 :root{
-  /* ---- base: azul-marinho Volvo, não preto cru ---- */
-  --tinta:#1b2a42;          /* marinho suave — texto e títulos em fundo claro */
-  --tinta-70:#51607a;       /* texto secundário */
-  --tinta-45:#8694ab;       /* legendas / rótulos */
-  --escuro:#121c2e;         /* fundo escuro (marinho profundo, não preto) */
-  --escuro-2:#1a2740;
+  /* ---- paleta "Portal Volvo": teal/petróleo + branco-cinza (só tons de teal) ---- */
+  --tinta:#1c2530;          /* quase-preto azulado — texto e títulos em fundo claro */
+  --tinta-70:#55606e;       /* texto secundário */
+  --tinta-45:#8b95a3;       /* legendas / rótulos */
+  --escuro:#06313a;         /* teal/petróleo profundo — fundos de impacto (do portal) */
+  --escuro-2:#0b4453;       /* teal um tom acima p/ gradiente */
 
-  --azul:#1f55a8;           /* azul Volvo — acento institucional */
-  --azul-claro:#3f78cf;     /* azul mais vivo p/ fundos escuros */
-  --azul-700:#163f7e;
-  --azul-suave:#dbe6f5;     /* azul claro p/ faixas/blocos */
-  --azul-nevoa:#eef3fa;     /* fundo claro com viés azul */
-  --amarelo:#f5c518;        /* amarelo — pontual (marca e destaques) */
+  /* nomes mantidos por compatibilidade; valores agora em TEAL */
+  --azul:#0f6f82;           /* teal médio — acento institucional (números, eyebrow) */
+  --azul-claro:#2fa8bf;     /* teal claro vivo p/ fundos escuros e destaques */
+  --azul-700:#0c5868;       /* teal escuro */
+  --azul-suave:#cfe6ea;     /* teal bem claro p/ faixas/blocos */
+  --azul-nevoa:#eef3f4;     /* fundo claro com leve viés teal */
+  --amarelo:#2fa8bf;        /* (antes amarelo) agora teal claro — destaque pontual, SEM cor quente */
 
-  --papel:#eef2f7;          /* fundo claro principal (azul-névoa, não lavado) */
-  --papel-2:#f6f8fc;
+  --papel:#f1f4f5;          /* fundo claro principal (branco-cinza, como o portal) */
+  --papel-2:#fafbfc;        /* branco-cinza mais claro (do portal) */
   --branco:#ffffff;
-  --linha:#dde5ef;          /* filetes (viés azul) */
-  --linha-forte:#c4d0e0;
+  --linha:#e2e7ea;          /* filetes (neutro levemente teal) */
+  --linha-forte:#cdd5d9;
 
   /* ---- tipografia: só sans (igual Volvo Novum) ---- */
   --f:"Inter","Noto Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -252,9 +253,9 @@ svg.ic{display:block}
 .cat-tag{font-weight:800;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta)}
 .cat-tag::before{content:"";display:inline-block;width:9px;height:9px;margin-right:9px;vertical-align:middle;border-radius:1px}
 .cat-tag.online::before{background:var(--azul)}
-.cat-tag.pres::before{background:var(--tinta)}
-.cat-tag.fis::before{background:#2e8b6f}
-.cat-tag.desafio::before{background:var(--amarelo)}
+.cat-tag.pres::before{background:var(--azul-700)}
+.cat-tag.fis::before{background:var(--azul-claro)}
+.cat-tag.desafio::before{background:var(--tinta)}
 .cat-cab::after{content:"";flex:1;height:1px;background:var(--linha)}
 .ativ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0 clamp(18px,2vw,30px)}
 .ativ{padding:14px 0;border-top:1px solid var(--linha)}
