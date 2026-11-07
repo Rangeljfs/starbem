@@ -351,6 +351,40 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .cat-card:hover .pill{border-color:var(--azul-suave)}
 .cat-nota{padding:0 20px 18px;font-size:.82rem;color:var(--tinta-70);line-height:1.5;margin-top:-4px}
 
+/* ====================== ajustes dos ajustes 07/11 ====================== */
+/* parêntese do Departamento Médico (destaque) */
+.pilar-dm{color:var(--azul);font-weight:700}
+.bg-escuro .pilar-dm,.bg-azul .pilar-dm{color:var(--amarelo)}
+
+/* escala-grid com 2 cards */
+.escala-grid.dois{grid-template-columns:repeat(2,1fr)}
+
+/* slide 5 — 2 boxes de estudo (OMS / Deloitte) */
+.retorno-box{border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:14px 16px;margin-top:14px;background:rgba(255,255,255,.04)}
+.retorno-box .rb-fonte{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amarelo);font-weight:800;margin-bottom:6px}
+.retorno-box p{margin:0;font-size:.94rem}
+
+/* slide 6 — bloco de evidências científicas */
+.evid-bloco{margin-top:26px;border-top:1px solid var(--linha);padding-top:18px}
+.evid-titulo{display:block;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--azul);margin-bottom:12px}
+.evid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
+.evid{border-left:2px solid var(--azul);padding-left:16px}
+.evid-fonte{display:block;font-size:.8rem;font-weight:800;color:var(--tinta);margin-bottom:6px}
+.evid p{margin:0;font-size:.9rem;color:var(--tinta-70);line-height:1.55}
+.evid p strong{color:var(--azul);font-weight:800}
+
+/* slide novo — Ações da Associação Volvo */
+.avc-wall{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,1.8vw,22px);margin-top:26px}
+.avc-card{background:var(--branco);border:1px solid var(--linha);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(6,49,58,.04),0 10px 26px rgba(6,49,58,.05);transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
+.avc-card:hover{transform:translateY(-3px);box-shadow:0 2px 6px rgba(6,49,58,.06),0 18px 40px rgba(6,49,58,.1)}
+.avc-top{display:flex;align-items:center;gap:14px;padding:14px 18px;color:#fff}
+.avc-card.ccol-1 .avc-top{background:linear-gradient(120deg,var(--azul) 0%,var(--azul-700) 100%)}
+.avc-card.ccol-2 .avc-top{background:linear-gradient(120deg,var(--azul-700) 0%,var(--escuro) 100%)}
+.avc-card.ccol-3 .avc-top{background:linear-gradient(120deg,var(--azul-claro) 0%,var(--azul) 100%)}
+.avc-card.ccol-4 .avc-top{background:linear-gradient(120deg,var(--escuro-2) 0%,var(--escuro) 100%)}
+.avc-nome{font-weight:800;font-size:1.02rem;letter-spacing:-.01em;line-height:1.15}
+.avc-card:hover .pill{border-color:var(--azul-suave)}
+
 /* ====================== 10 · AÇÃO SOCIAL ====================== */
 .social-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,60px);align-items:center;margin-top:34px}
 .social-img img{aspect-ratio:4/3;object-fit:cover;width:100%;border-radius:3px}
@@ -422,6 +456,11 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
   .ctx-grid,.promo-grid,.social-grid,.graf-grid{grid-template-columns:1fr}
   .promo-lista{grid-template-columns:1fr}
   .benef-grid{grid-template-columns:1fr}
+  .evid-grid{grid-template-columns:1fr;gap:18px}
+  .evid{border-left:0;padding-left:0;border-top:1px solid var(--linha);padding-top:16px}
+  .evid:first-child{border-top:0;padding-top:0}
+  .avc-wall{grid-template-columns:1fr}
+  .escala-grid.dois{grid-template-columns:1fr}
 }
 
 /* ========= CELULAR: rola de verdade, nada cortado nem sobreposto ========= */
