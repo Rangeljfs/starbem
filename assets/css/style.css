@@ -401,7 +401,7 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .nota{margin-top:32px;font-size:.78rem;color:var(--tinta-45);line-height:1.55}
 
 /* ====================== 12 · BENEFÍCIOS / FINAL ====================== */
-.benef-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(40px,5vw,72px);margin-top:38px}
+.benef-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(36px,4vw,60px);margin-top:38px}
 .benef{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-top:1px solid rgba(255,255,255,.16)}
 .benef b{display:block;font-size:1.1rem;font-weight:800;margin-bottom:5px;color:#fff;letter-spacing:-.01em}
 .benef span{font-size:.9rem;color:rgba(255,255,255,.76);line-height:1.55}
