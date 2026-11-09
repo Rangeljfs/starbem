@@ -350,6 +350,7 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .pill{display:inline-flex;align-items:center;font-size:.82rem;font-weight:600;color:var(--tinta);background:var(--azul-nevoa);border:1px solid var(--linha);border-radius:999px;padding:7px 14px;line-height:1.1;transition:.2s}
 .cat-card:hover .pill{border-color:var(--azul-suave)}
 .cat-nota{padding:0 20px 18px;font-size:.82rem;color:var(--tinta-70);line-height:1.5;margin-top:-4px}
+.ccol-4 .cat-nota{margin-top:0;padding-top:22px}
 
 /* ====================== ajustes dos ajustes 07/11 ====================== */
 /* parêntese do Departamento Médico (destaque) */
