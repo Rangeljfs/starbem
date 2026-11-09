@@ -372,6 +372,20 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
 .evid-fonte{display:block;font-size:.8rem;font-weight:800;color:var(--tinta);margin-bottom:6px}
 .evid p{margin:0;font-size:.9rem;color:var(--tinta-70);line-height:1.55}
 .evid p strong{color:var(--azul);font-weight:800}
+.evid-chave{margin:0 0 16px;font-size:.96rem;line-height:1.6;color:var(--tinta);max-width:88ch;border-left:3px solid var(--azul);padding-left:16px}
+.evid-grid.dois{grid-template-columns:repeat(2,1fr)}
+
+/* slide novo — mecanismos biológicos (neurotransmissores) */
+.neuro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.2vw,30px) clamp(26px,3vw,44px);margin-top:32px}
+.neuro{display:flex;gap:15px;align-items:flex-start;padding-top:18px;border-top:1px solid var(--linha)}
+.neuro-ic{flex:0 0 auto;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:2px;background:var(--azul-nevoa);color:var(--azul)}
+.neuro-ic .ic{width:21px;height:21px;stroke:var(--azul);fill:none;stroke-width:1.6}
+.neuro b{display:block;font-size:1.04rem;font-weight:800;color:var(--tinta);letter-spacing:-.01em;margin-bottom:4px}
+.neuro span{display:block;font-size:.86rem;color:var(--tinta-70);line-height:1.5}
+.neuro-refs{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:30px;padding-top:16px;border-top:1px solid var(--linha)}
+.nr-lab{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--azul)}
+.nr-item{font-size:.82rem;color:var(--tinta-70);font-weight:600}
+.nr-item + .nr-item{padding-left:18px;border-left:1px solid var(--linha)}
 
 /* slide novo — Ações da Associação Volvo */
 .avc-lista{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;max-width:980px}
@@ -435,6 +449,22 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
   #s5 .chart{height:clamp(160px,20vh,200px)}
   #s7 .promo-grid{margin-top:20px}
   #s7 .lead{margin-top:10px}
+  #s6 .s-titulo{font-size:2rem}
+  #s6 .obj-lista{margin-top:16px}
+  #s6 .obj{padding:14px 0}
+  #s6 .obj .ic-wrap{margin-bottom:4px}
+  #s6 .obj h3{margin-top:7px;font-size:1rem}
+  #s6 .obj p{font-size:.84rem;line-height:1.45}
+  #s6 .evid-bloco{margin-top:14px;padding-top:12px}
+  #s6 .evid-titulo{margin-bottom:8px}
+  #s6 .evid-chave{margin-bottom:10px;font-size:.88rem;line-height:1.5}
+  #s6 .evid-grid{gap:16px}
+  #s6 .evid p{font-size:.86rem}
+  #s6b .lead{margin-top:12px}
+  #s6b .neuro-grid{margin-top:22px;gap:14px clamp(24px,3vw,40px)}
+  #s6b .neuro{padding-top:14px}
+  #s6b .neuro span{font-size:.82rem}
+  #s6b .neuro-refs{margin-top:20px;padding-top:12px}
 }
 
 /* ====================== RESPONSIVO ====================== */
@@ -455,6 +485,10 @@ body.escuro-prog .assinatura{color:rgba(255,255,255,.5)}
   .avc-lista{gap:9px;margin-top:26px}
   .avc-lista .pill{font-size:.86rem;padding:9px 15px}
   .escala-grid.dois{grid-template-columns:1fr}
+  .neuro-grid{grid-template-columns:1fr;gap:0}
+  .neuro:first-child{border-top:0;padding-top:0}
+  .neuro-refs{gap:6px}
+  .nr-item + .nr-item{padding-left:0;border-left:0}
 }
 
 /* ========= CELULAR: rola de verdade, nada cortado nem sobreposto ========= */
